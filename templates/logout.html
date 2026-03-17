@@ -1,0 +1,19 @@
+{% extends "home.html" %} {% load i18n %}
+<a></a>
+{% block head_title %}Выход{% endblock %}
+<a></a>
+{% block content %}
+<div class="sign-wrapper">
+  <div class="sign-header">
+    <h4>Выход</h4>
+  </div>
+  <div class="form-wrapper">
+    <p>Вы действительно хотите выйти?</p>
+    <form method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %}
+      <button class="sign-button" type="submit">Выход</button>
+    </form>
+    <a href="{% url 'journal_list' %}" class="back-href">Отмена</a>
+  </div>
+</div>
+{% endblock %}

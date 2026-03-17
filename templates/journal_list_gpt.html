@@ -1,0 +1,34 @@
+{% extends 'home.html' %} {% block content %}
+<h1>Journal List</h1>
+<form method="get" action="">
+  <input
+    type="text"
+    name="name_asu"
+    placeholder="Filter by ASU name"
+    value="{{ request.GET.name_asu }}"
+  />
+  <input
+    type="text"
+    name="module_type"
+    placeholder="Filter by Module Type"
+    value="{{ request.GET.module_type }}"
+  />
+  <input
+    type="text"
+    name="fault"
+    placeholder="Filter by Fault"
+    value="{{ request.GET.fault }}"
+  />
+  <button type="submit">Apply Filters</button>
+</form>
+<ul>
+  {% for journal in journals %}
+  <li>
+    <a href="{{ journal.id }}"
+      >{{ journal.name_asu.name }} - {{ journal.date_def }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'journal_create' %}">Add New Journal</a>
+{% endblock %}

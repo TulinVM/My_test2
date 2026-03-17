@@ -1,0 +1,90 @@
+{% extends 'home.html' %} 
+{% block title %} Мое АСУ {% endblock title %} 
+{% block content %}
+{% load static %}
+<main class="main">
+  <div class="result-wrapper">
+    <h1>Информация о наличии и состояние замечаний по АСУ ТП</h1>
+      <div class="tabs">
+        
+          {% if journals %}
+        <div class="form-wrapper form-wrapper-small">
+         <form method="get" class="login">
+            <div class="right">
+                  {{ filter.form }}
+            </div>
+          <button type="submit" class="sign-button sign-button-large">Фильтровать</button>
+           </form>
+             </div>
+
+          <div class="adaptive-table-wrapper">
+          <table class="adaptive-table">
+            <thead>
+              <tr>
+                <th>Дата неисправности</th>
+                <th>Наименование АСУ ТП</th>
+                <th>№ шкафа</th>
+                <th>Тип модуля</th>
+                <th>№ модуля</th>
+                <th>№ канала</th>
+                <th>Тип модуля МКС</th>
+                <th>№ канала МКС</th>
+                <th>Назначение канала</th>
+                <th>Неисправность</th>
+                <th>Автор записи</th>
+                <th>Мероприятия</th>
+                <th>Дата мероприятия</th>
+                <th>Автор мероприятий</th>
+                <th>Изменить</th>
+              </tr>
+            </thead>
+          <tbody>
+           {% for journal in journals %}
+            <tr>
+              <td>
+                <div class="summary-button">
+                  <a href="{% url 'journal_detail' journal.id %}" class="back-href">{{ journal.date_def }}</a>
+                  <img src="{% static 'img/eye.svg' %}" alt="Просмотреть" width="16" height="16" class="mg-lft">
+                </div>
+              </td>
+                <td>{{ journal.name_asu }}</td>
+                <td>{{ journal.number_cabinet }}</td>                      
+                <td>{{ journal.module_type }}</td>
+                <td>{{ journal.number_module }}</td>
+                <td>{{ journal.number_cannel }}</td>
+                <td>{{ journal.module_type_mkc }}</td>             
+                <td>{{ journal.number_cannel_mkc }}</td>
+                <td>{{ journal.channel_purpose }}</td>
+                <td>{{ journal.fault }}</td>
+                <td>{{ journal.author_def }}</td>
+                <td>{{ journal.events }}</td>
+                <td>{{ journal.date_events }}</td>
+                <td>{{ journal.author_events }}</td>
+                                                            
+                  {% csrf_token %}                                                  
+                <td>
+                  <a href="{% url 'journal_detail' journal.pk %}">Просмотр</a>
+                  <a href="{% url 'journal_update' journal.pk %}">Редактировать</a>
+                  <a href="{% url 'journal_delete' journal.pk %}">Удалить</a>
+                </td>                     
+            </tr>
+             {% endfor %}
+          </tbody>
+        </table>
+        </div>
+          {% else %}
+        <div class="result-wrapper">
+          <span class="info-if-doesnt-exists">У вас нет дефектов</span>
+     
+          {% endif %}
+      <div class create-form-wrapper>
+         
+            <form action="{% url 'journal_create' %}">
+              <button class="sign-button active-tab" class="sign-button">
+               Добавить
+              </button>                         
+            </form>
+          </div>
+         </div>
+</main>
+{% endblock content %} 

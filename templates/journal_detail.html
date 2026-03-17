@@ -1,0 +1,30 @@
+{% extends 'home.html' %} {% block title %} Детали {% endblock title %}
+<a></a>
+{% block content %}
+<main class="main">
+  {% if journal %}
+  <div class="user-info">
+    <span>Дата неисправности: {{ journal.date_def }}</span>
+    <span>Наименование АСУ ТП: {{ journal.name_asu }}</span>
+    <span>№ шкафа: {{ journal.number_cabinet }}</span>
+    <span>Тип модуля УСО: {{ journal.module_type }}</span>
+    <span>№ модуля УСО: {{ journal.number_module }}</span>
+    <span>№ канала УСО: {{ journal.number_cannel }}</span>
+    <span>Тип модуля МКС: {{ journal.module_type_mkc }}</span>
+    <span>№ модуля МКС: {{ journal.number_module_mkc }}</span>
+    <span>№ канала МКС: {{ journal.number_cannel_mkc }}</span>
+    <span>Назначение канала: {{ journal.channel_purpose }}</span>
+    <span>Неисправность: {{ journal.fault }}</span>
+    <span>Автор записи: {{ journal.author_def }}</span>
+    <span>Мероприятия: {{ journal.events }}</span>
+    <span>Дата мероприятия: {{ journal.date_events }}</span>
+    <span>Автор мероприятий: {{ journal.author_events }}</span>
+  </div>
+  <div class="result-wrapper">
+    <h1>Информация о неисправности АСУ ТП</h1>
+  </div>
+
+  <a href="{% url 'journal_list' %}" class="back-href">Назад</a>
+  {% endif %}
+</main>
+{% endblock %}

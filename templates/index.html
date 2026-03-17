@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+<a></a>
+{% block title %} Журнал дефектов РТС {% endblock title %}
+<a></a>
+{% block content %} {% load static %}
+<main class="main">
+  <form action="" method="POST" class="get-journal">{% csrf_token %}</form>
+  <div class="result-wrapper">
+    <h1>
+      Информация о состоянии технических средств ПТК АСУТП "Текон" РТС "Кунцево"
+    </h1>
+  <!-- </div> -->
+  <!-- <div class="result-wrapper"> -->
+    <span>Вход на сайт.</span>
+    <h1><a href="{% url 'account_login' %}">Авторизация</a></h1>
+
+    <span>Замечания не найдены</span>
+  </div>
+</main>
+{% endblock content %}
